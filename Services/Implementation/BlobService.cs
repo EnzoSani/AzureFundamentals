@@ -1,4 +1,5 @@
 ﻿using Azure.Storage.Blobs;
+using Azure.Storage.Blobs.Models;
 using AzureBlobProject.Services.Interface;
 using NuGet.Protocol;
 
@@ -11,9 +12,11 @@ namespace AzureBlobProject.Services.Implementation
         {
             _blobClient = blobClient;
         }
-        public Task<bool> DeleteBlob(string blobName, string containerName)
+        public async Task<bool> DeleteBlob(string blobName, string containerName)
         {
-            throw new NotImplementedException();
+            BlobContainerClient blobContainerClient = _blobClient.GetBlobContainerClient(containerName);
+            var blobClient = blobContainerClient.GetBlobClient(blobName);
+            return await blobClient.DeleteIfExistsAsync();
         }
 
         public async Task<List<string>> GetAllBlobs(string containerName)
@@ -28,14 +31,28 @@ namespace AzureBlobProject.Services.Implementation
             return blobString;
         }
 
-        public Task<string> GetBlob(string blobName, string containerName)
+        public async Task<string> GetBlob(string blobName, string containerName)
         {
-            throw new NotImplementedException();
+            BlobContainerClient blobContainerClient = _blobClient.GetBlobContainerClient(containerName);
+            var blobClient = blobContainerClient.GetBlobClient(blobName);
+            return blobClient.Uri.AbsoluteUri;
         }
 
-        public Task<bool> UploadBlob(string blobName, IFormFile formFile, string containerName)
+        public async Task<bool> UploadBlob(string blobName, IFormFile formFile, string containerName)
         {
-            throw new NotImplementedException();
+            BlobContainerClient blobContainerClient = _blobClient.GetBlobContainerClient(containerName);
+            var blobClient = blobContainerClient.GetBlobClient(blobName);
+            var httpHeaders = new BlobHttpHeaders
+            {
+                ContentType = formFile.ContentType
+            };
+
+            var result = await blobClient.UploadAsync(formFile.OpenReadStream(), httpHeaders);
+            if (result != null)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
