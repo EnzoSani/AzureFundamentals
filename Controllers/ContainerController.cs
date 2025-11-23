@@ -34,5 +34,7 @@ namespace AzureBlobProject.Controllers
             await _containerService.CreateContainerAsync(container.Name);
             return RedirectToAction(nameof(Index));
         }
+
+
     }
 }
