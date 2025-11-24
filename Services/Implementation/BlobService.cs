@@ -42,7 +42,7 @@ namespace AzureBlobProject.Services.Implementation
         {
             BlobContainerClient blobContainerClient = _blobClient.GetBlobContainerClient(containerName);
             var blobClient = blobContainerClient.GetBlobClient(blobName);
-            var httpHeaders = new BlobHttpHeaders
+            var httpHeaders = new BlobHttpHeaders()
             {
                 ContentType = formFile.ContentType
             };
