@@ -1,5 +1,6 @@
 ﻿using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
+using AzureBlobProject.Models;
 using AzureBlobProject.Services.Interface;
 using NuGet.Protocol;
 
@@ -38,7 +39,7 @@ namespace AzureBlobProject.Services.Implementation
             return blobClient.Uri.AbsoluteUri;
         }
 
-        public async Task<bool> UploadBlob(string blobName, IFormFile formFile, string containerName)
+        public async Task<bool> UploadBlob(string blobName, IFormFile formFile, string containerName, BlobModel blobModel)
         {
             BlobContainerClient blobContainerClient = _blobClient.GetBlobContainerClient(containerName);
             var blobClient = blobContainerClient.GetBlobClient(blobName);
@@ -47,7 +48,17 @@ namespace AzureBlobProject.Services.Implementation
                 ContentType = formFile.ContentType
             };
 
-            var result = await blobClient.UploadAsync(formFile.OpenReadStream(), httpHeaders);
+            IDictionary<string, string> metaData = new Dictionary<string, string>();
+            if (!string.IsNullOrEmpty(blobModel.Title))
+            {
+                metaData.Add("title", blobModel.Title);
+            }
+            if (!string.IsNullOrEmpty(blobModel.Comment))
+            {
+                metaData.Add("comment", blobModel.Comment);
+            }
+
+            var result = await blobClient.UploadAsync(formFile.OpenReadStream(), httpHeaders, metaData);
             if (result != null)
             {
                 return true;
