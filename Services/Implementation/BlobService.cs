@@ -59,6 +59,11 @@ namespace AzureBlobProject.Services.Implementation
             }
 
             var result = await blobClient.UploadAsync(formFile.OpenReadStream(), httpHeaders, metaData);
+
+            //IDictionary<string,string> removeMetaData = new Dictionary<string, string>();
+
+            //metaData.Remove("title");
+            //await blobClient.SetMetadataAsync(metaData);
             if (result != null)
             {
                 return true;
