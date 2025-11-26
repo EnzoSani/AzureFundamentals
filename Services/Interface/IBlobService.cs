@@ -7,6 +7,7 @@ namespace AzureBlobProject.Services.Interface
     {
         Task<string> GetBlob(string blobName,string containerName);
         Task<List<string>> GetAllBlobs(string containerName);
+        Task<List<BlobModel>> GetAllBlobsWhitUri(string containerName);
         Task<bool> UploadBlob(string blobName, IFormFile formFile,string containerName, BlobModel blob);
         Task<bool> DeleteBlob(string blobName,string containerName);
     }
