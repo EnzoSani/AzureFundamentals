@@ -18,6 +18,8 @@ namespace AzureFunctionLunyWeb.Controllers
             return View();
         }
 
+        //http://localhost:7020/api/OnSalesUploadWriteToQueue
+
         public IActionResult Privacy()
         {
             return View();
