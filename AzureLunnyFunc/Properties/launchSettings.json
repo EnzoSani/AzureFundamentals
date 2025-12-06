@@ -1,8 +1,8 @@
 {
   "profiles": {
-    "AzureLunyFunc": {
+    "AzureLunnyFunc": {
       "commandName": "Project",
-      "commandLineArgs": "--port 7050",
+      "commandLineArgs": "--port 7210",
       "launchBrowser": false
     }
   }

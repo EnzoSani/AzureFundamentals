@@ -1,6 +1,8 @@
 using AzureFunctionLunyWeb.Models;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.Diagnostics;
+using System.Net.Http;
 
 namespace AzureFunctionLunyWeb.Controllers
 {
@@ -8,7 +10,6 @@ namespace AzureFunctionLunyWeb.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IHttpClientFactory _httpClientFactory;
-
         public HomeController(ILogger<HomeController> logger, IHttpClientFactory httpClientFactory)
         {
             _logger = logger;
@@ -20,14 +21,21 @@ namespace AzureFunctionLunyWeb.Controllers
             return View();
         }
 
-        //http://localhost:7020/api/OnSalesUploadWriteToQueue
+        //http://http://localhost:7210/api/Function1
 
         [HttpPost]
         public async Task<IActionResult> Index(SalesRequest salesRequest)
         {
+            salesRequest.Id = Guid.NewGuid().ToString();
             using var client = _httpClientFactory.CreateClient();
-            client.BaseAddress = new Uri("http://localhost:7070/api/");
-            await client.GetAsync("OnSalesUploadWriteToQueue");
+            client.BaseAddress = new Uri("http://localhost:7210/api/");
+            using (var content = new StringContent(JsonConvert.SerializeObject(salesRequest), System.Text.Encoding.UTF8, "application/json"))
+            {
+                HttpResponseMessage response = await client.PostAsync("OnSalesUploadWriteToQueue", content);
+                string returnValue = await response.Content.ReadAsStringAsync();
+
+            }
+
 
             return RedirectToAction(nameof(Index));
         }

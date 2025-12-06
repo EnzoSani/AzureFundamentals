@@ -11,9 +11,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AzureBlobExample", "AzureBl
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AzureFunctionExample", "AzureFunctionExample", "{F4E9EBD9-AA8D-4F59-8F39-9CDD12BD2677}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureLunyFunc", "AzureLunyFunc\AzureLunyFunc.csproj", "{3F8C1535-8D2E-41C4-9B41-2597096C032F}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AzureLunyFunc", "AzureLunyFunc", "{2DBCB9AA-C61D-4BCE-89B6-CAEBFA6D3B83}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureLunnyFunc", "AzureLunnyFunc\AzureLunnyFunc.csproj", "{425D0D19-02C2-4EE0-A447-312BB80E2A76}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{164C8E4B-A8BD-4DF8-81C1-E3519C699F02}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{164C8E4B-A8BD-4DF8-81C1-E3519C699F02}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{164C8E4B-A8BD-4DF8-81C1-E3519C699F02}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3F8C1535-8D2E-41C4-9B41-2597096C032F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3F8C1535-8D2E-41C4-9B41-2597096C032F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3F8C1535-8D2E-41C4-9B41-2597096C032F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3F8C1535-8D2E-41C4-9B41-2597096C032F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{425D0D19-02C2-4EE0-A447-312BB80E2A76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{425D0D19-02C2-4EE0-A447-312BB80E2A76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{425D0D19-02C2-4EE0-A447-312BB80E2A76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{425D0D19-02C2-4EE0-A447-312BB80E2A76}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -40,7 +40,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{AF58B10D-4211-4FD3-8E7E-96E815A39D6D} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{164C8E4B-A8BD-4DF8-81C1-E3519C699F02} = {F4E9EBD9-AA8D-4F59-8F39-9CDD12BD2677}
-		{3F8C1535-8D2E-41C4-9B41-2597096C032F} = {2DBCB9AA-C61D-4BCE-89B6-CAEBFA6D3B83}
+		{425D0D19-02C2-4EE0-A447-312BB80E2A76} = {2DBCB9AA-C61D-4BCE-89B6-CAEBFA6D3B83}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5CF7C796-97FA-4343-BD09-7F9935A83D01}
