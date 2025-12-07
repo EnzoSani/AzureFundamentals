@@ -1,8 +1,10 @@
 using System;
 using Azure.Storage.Queues.Models;
 using AzureLunnyFunc.Data;
+using AzureLunnyFunc.Models;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 
 namespace AzureLunnyFunc
 {
@@ -20,7 +22,20 @@ namespace AzureLunnyFunc
         [Function(nameof(OnQueueTriggerUpdateDatabase))]
         public void Run([QueueTrigger("SalesRequestInBound")] QueueMessage message)
         {
-            _logger.LogInformation($"C# Queue trigger function processed: {message.MessageText}");
+            string messageBody = message.Body.ToString();
+            SalesRequest? salesRequest = JsonConvert.DeserializeObject<SalesRequest>(messageBody);
+
+            if (salesRequest != null)
+            {
+                 salesRequest.Status = ""; 
+                _dbContext.SalesRequests.Add(salesRequest);
+                _dbContext.SaveChanges();
+                _logger.LogInformation($"SalesRequest with ID: {salesRequest.Id} has been added to the database.");
+            }
+            else
+            {
+                _logger.LogError("Failed to deserialize the sales request from the queue message.");
+            }
         }
     }
 }
