@@ -1,3 +1,5 @@
+using Azure.Storage.Blobs;
+using Azure.Storage.Blobs.Models;
 using AzureFunctionLunyWeb.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -11,10 +13,12 @@ namespace AzureFunctionLunyWeb.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IHttpClientFactory _httpClientFactory;
-        public HomeController(ILogger<HomeController> logger, IHttpClientFactory httpClientFactory)
+        private readonly BlobServiceClient _blobServiceClient;
+        public HomeController(ILogger<HomeController> logger, IHttpClientFactory httpClientFactory, BlobServiceClient blobServiceClient)
         {
             _logger = logger;
             _httpClientFactory = httpClientFactory;
+            _blobServiceClient = blobServiceClient;
         }
 
         public IActionResult Index()
@@ -40,8 +44,15 @@ namespace AzureFunctionLunyWeb.Controllers
             if(file != null)
             {
                 var fileName = salesRequest.Id + Path.GetExtension(file.FileName);
-            }
+                BlobContainerClient containerClient = _blobServiceClient.GetBlobContainerClient("funcationsalesrep");
+                var blobClient = containerClient.GetBlobClient(fileName);
 
+                var httpheaders = new BlobHttpHeaders()
+                {
+                    ContentType = file.ContentType
+                };
+                await blobClient.UploadAsync(file.OpenReadStream(), httpheaders);
+            }
 
             return RedirectToAction(nameof(Index));
         }
