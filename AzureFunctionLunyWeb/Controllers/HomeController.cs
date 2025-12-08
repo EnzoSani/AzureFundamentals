@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Diagnostics;
 using System.Net.Http;
+using System.Xml.XPath;
 
 namespace AzureFunctionLunyWeb.Controllers
 {
@@ -24,7 +25,7 @@ namespace AzureFunctionLunyWeb.Controllers
         //http://http://localhost:7210/api/Function1
 
         [HttpPost]
-        public async Task<IActionResult> Index(SalesRequest salesRequest)
+        public async Task<IActionResult> Index(SalesRequest salesRequest, IFormFile file)
         {
             salesRequest.Id = Guid.NewGuid().ToString();
             using var client = _httpClientFactory.CreateClient();
@@ -34,6 +35,11 @@ namespace AzureFunctionLunyWeb.Controllers
                 HttpResponseMessage response = await client.PostAsync("OnSalesUploadWriteToQueue", content);
                 string returnValue = await response.Content.ReadAsStringAsync();
 
+            }
+
+            if(file != null)
+            {
+                var fileName = salesRequest.Id + Path.GetExtension(file.FileName);
             }
 
 
