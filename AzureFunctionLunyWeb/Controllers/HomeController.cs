@@ -44,7 +44,7 @@ namespace AzureFunctionLunyWeb.Controllers
             if(file != null)
             {
                 var fileName = salesRequest.Id + Path.GetExtension(file.FileName);
-                BlobContainerClient containerClient = _blobServiceClient.GetBlobContainerClient("funcationsalesrep");
+                BlobContainerClient containerClient = _blobServiceClient.GetBlobContainerClient("functionsalesrep");
                 var blobClient = containerClient.GetBlobClient(fileName);
 
                 var httpheaders = new BlobHttpHeaders()
