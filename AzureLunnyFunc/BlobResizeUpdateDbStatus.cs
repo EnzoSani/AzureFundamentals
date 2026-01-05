@@ -26,7 +26,7 @@ public class BlobResizeUpdateDbStatus
         SalesRequest? salesRequest = await _dbContext.SalesRequests.FirstOrDefaultAsync(u => u.Id == fileName);
         if (salesRequest != null)
         {
-            salesRequest.Status = "Completed";
+            salesRequest.Status = "Image Processed";
             await _dbContext.SaveChangesAsync();
         }
 
