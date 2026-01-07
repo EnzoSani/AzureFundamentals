@@ -4,7 +4,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-string connectionToContainerString = builder.Configuration["StorageConnection"];
+string connectionToContainerString = builder.Configuration["AzureWebJobsStorage"];
 builder.Services.AddSingleton(u => new BlobServiceClient(connectionToContainerString));
 
 builder.Services.AddHttpClient();

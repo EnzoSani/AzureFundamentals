@@ -9,8 +9,11 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<IContainerService, ContainerService>();
 builder.Services.AddSingleton<IBlobService, BlobService>();
 //Azure Connection
-builder.Services.AddSingleton(sp=> 
-new BlobServiceClient(builder.Configuration["AzureStorage:BlobConnection"]));
+//builder.Services.AddSingleton(sp =>
+//new BlobServiceClient(builder.Configuration["AzureStorage:BlobConnection"]));
+
+//// FUERZA EL EMULADOR LOCAL DIRECTAMENTE:
+builder.Services.AddSingleton(x => new BlobServiceClient("UseDevelopmentStorage=true"));
 
 var app = builder.Build();
 

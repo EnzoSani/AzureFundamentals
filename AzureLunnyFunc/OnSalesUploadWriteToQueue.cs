@@ -17,7 +17,7 @@ namespace AzureLunnyFunc
         }
 
         [Function("OnSalesUploadWriteToQueue")]
-        [QueueOutput("SalesRequestInBound", Connection = "AzureWebJobsStorage")]
+        [QueueOutput("SalesRequestInBound", Connection = "azurewebjobsstorage")]
         public async Task<SalesRequest> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")] HttpRequest req)
         {
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();

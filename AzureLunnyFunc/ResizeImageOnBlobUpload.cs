@@ -18,7 +18,7 @@ public class ResizeImageOnBlobUpload
 
     [Function(nameof(ResizeImageOnBlobUpload))]
     [BlobOutput("functionsalesrep-final/{name}")]
-    public async Task<Byte[]> Run([BlobTrigger("functionsalesrep/{name}", Connection = "AzureWebJobsStorage")] Byte[] myBlobByte, string name)
+    public async Task<Byte[]> Run([BlobTrigger("functionsalesrep/{name}", Connection = "azurewebjobsstorage")] Byte[] myBlobByte, string name)
     {
 
         using var memoryStream = new MemoryStream(myBlobByte);
