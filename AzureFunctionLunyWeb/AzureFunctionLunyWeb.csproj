@@ -10,5 +10,8 @@
 		<PackageReference Include="Azure.Storage.Blobs" Version="12.26.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
 	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Views\Grocery\" />
+	</ItemGroup>
 
 </Project>
