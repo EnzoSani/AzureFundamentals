@@ -25,7 +25,7 @@ public class GroceryAPI
         _logger.LogInformation("Getting Grocery List Items.");
 
 
-        return new OkObjectResult(_dbContext.Grocery.ToList());
+        return new OkObjectResult(_dbContext.GroceryItems.ToList());
     }
 
     [Function("CreateGrocery")]
@@ -39,9 +39,9 @@ public class GroceryAPI
         {
             Name = data.Name
         };
-        _dbContext.Grocery.Add(groceryItem);
+        _dbContext.GroceryItems.Add(groceryItem);
         _dbContext.SaveChanges();
 
-        return new OkObjectResult(_dbContext.Grocery.ToList());
+        return new OkObjectResult(_dbContext.GroceryItems.ToList());
     }
 }
